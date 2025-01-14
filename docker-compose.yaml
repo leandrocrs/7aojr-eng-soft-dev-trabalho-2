@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  gamefication-service:
+    build: ./gamefication-service
+    container_name: gamefication-service_container
+    ports:
+      - "8001:8001"
+
+  notification-service:
+    build: ./notification-service
+    container_name: notification-service_container
+    ports:
+      - "8002:8002"
+
+  playlists-catalog-service:
+    build: ./playlists-catalog-service
+    container_name: playlists-catalog-service_container
+    ports:
+      - "8003:8003"
+
+  recommendation-service:
+    build: ./recommendation-service
+    container_name: recommendation-service_container
+    ports:
+      - "8004:8004"
+
+  report-and-progress-service:
+    build: ./report-and-progress-service
+    container_name: report-and-progress-service_container
+    ports:
+      - "8005:8005"
+
+  training-service:
+    build: ./training-service
+    container_name: training-service_container
+    ports:
+      - "8006:8006"  
+
+  user-management-service:
+    build: ./user-management-service
+    container_name: user-management-service_container
+    ports:
+      - "8007:8007"
