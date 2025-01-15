@@ -1,0 +1,23 @@
+{
+  "name": "user-management-service",
+  "version": "1.0.0",
+  "description": "Serviço de gerenciamento de usuários",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "swagger-ui-express": "^5.0.1",
+    "uuid": "^11.0.5",
+    "yaml": "^2.7.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/swagger-ui-express": "^4.1.7"
+  }
+}
