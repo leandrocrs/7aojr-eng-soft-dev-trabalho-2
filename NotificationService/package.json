@@ -1,0 +1,17 @@
+{
+  "name": "notification-service",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "Serviço de notificações",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "swagger-ui-express": "^5.0.1",
+    "yaml": "^2.7.0"
+  }
+}
