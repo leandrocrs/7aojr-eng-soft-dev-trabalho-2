@@ -16,6 +16,7 @@ router.get('/playlists', (req, res) => {
 
 router.get('/playlists/:id', (req, res) => {
     try {
+        console.log("Request Recieved at /playlists/:id")
         return res.status(200).send({ notifications });
     } catch (error) {
         return res.status(500).send({ message: error.message });
