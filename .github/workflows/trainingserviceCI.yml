@@ -1,12 +1,12 @@
-name: Notification Service CI
+name: Training Service CI
 
 on:
   push:
     paths:
-      - 'NotificationService/**'
+      - 'TrainingService/**'
   pull_request:
     paths:
-      - 'NotificationService/**'
+      - 'TrainingService/**'
 
 jobs:
   build:
@@ -17,4 +17,4 @@ jobs:
         
       - name: Run Payment API build
         run: |
-          echo "NotificationService building"
+          echo "TrainingService building"
