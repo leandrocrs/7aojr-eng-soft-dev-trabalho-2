@@ -1,0 +1,20 @@
+name: Recommendation Service CI
+
+on:
+  push:
+    paths:
+      - 'NotificationService/**'
+  pull_request:
+    paths:
+      - 'NotificationService/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Run Payment API build
+        run: |
+          echo "NotificationService building"

@@ -1,0 +1,20 @@
+name: Playlist Catalog Service CI
+
+on:
+  push:
+    paths:
+      - 'PlaylistCatalogService/**'
+  pull_request:
+    paths:
+      - 'PlaylistCatalogService/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Run Payment API build
+        run: |
+          echo "PlaylistCatalogService building"

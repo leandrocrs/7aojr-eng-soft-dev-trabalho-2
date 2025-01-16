@@ -1,0 +1,20 @@
+name: Report And Progress Service CI
+
+on:
+  push:
+    paths:
+      - 'ReportAndProgressService/**'
+  pull_request:
+    paths:
+      - 'ReportAndProgressService/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Run Payment API build
+        run: |
+          echo "ReportAndProgressService building"
