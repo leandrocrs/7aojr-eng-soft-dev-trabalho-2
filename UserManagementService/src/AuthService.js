@@ -48,7 +48,6 @@ export class AuthService {
         }
 
         const token = jwt.sign({name: user.username, role: user.role}, process.env.ACCESS_TOKEN_SECRET)
-        console.log(token)
         return token
     }
 
