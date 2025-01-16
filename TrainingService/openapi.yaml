@@ -1,0 +1,23 @@
+openapi: 3.0.0
+info:
+  title: Training Service
+  version: 1.0.0
+paths:
+  /training:
+    get:
+      responses:
+        "200":
+          description: OK
+  /training/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the training to return
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+         
