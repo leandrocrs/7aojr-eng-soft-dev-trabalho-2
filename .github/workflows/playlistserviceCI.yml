@@ -1,12 +1,12 @@
-name: Playlist Catalog Service CI
+name: Playlists Catalog Service CI
 
 on:
   push:
     paths:
-      - 'PlaylistCatalogService/**'
+      - 'PlaylistsCatalogService/**'
   pull_request:
     paths:
-      - 'PlaylistCatalogService/**'
+      - 'PlaylistsCatalogService/**'
 
 jobs:
   build:
@@ -17,4 +17,4 @@ jobs:
         
       - name: Run Payment API build
         run: |
-          echo "PlaylistCatalogService building"
+          echo "PlaylistsCatalogService building"
