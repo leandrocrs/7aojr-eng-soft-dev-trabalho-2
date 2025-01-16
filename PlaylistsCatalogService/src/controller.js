@@ -7,6 +7,7 @@ const notifications = [];
 
 router.get('/playlists', (req, res) => {
     try {
+        console.log("Request Recieved at /playlists")
         return res.status(200).send({ notifications });
     } catch (error) {
         return res.status(500).send({ message: error.message });
