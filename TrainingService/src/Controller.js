@@ -29,6 +29,7 @@ router.get('/trainings/:id', async (req, res) => {
 router.put('/trainings/:id', async (req, res) => {
   try {
     const updatedTraining = await repository.updateById(req.params.id, req.body)
+    console.log(updatedTraining)
     res.status(200).json(updatedTraining)
   } catch(error) {
     return res.status(500).send({ message: error.message })
