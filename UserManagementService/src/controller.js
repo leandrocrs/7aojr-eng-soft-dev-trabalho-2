@@ -10,9 +10,8 @@ const authService = new AuthService(usersRepository);
 
 router.post('/authenticate', async (req, res) => {
     try {
-        const user = await authService.authenticate(req.body);
-
-        return res.status(200).send(user);
+        const token = await authService.authenticate(req.body);
+        return res.status(200).json({ accessToken: token});
     } catch (error) {
         if (error instanceof UserNotFoundError) {
             return res.status(404).send({ message: error.message });

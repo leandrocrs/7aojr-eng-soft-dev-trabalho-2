@@ -3,7 +3,7 @@
  * @property {string} id
  * @property {string} name
  * @property {string} descrioption
- * @property {int[]} sets
+ * @property {ExercicieSet[]} sets
  */
 
 export class Exercice {
@@ -16,14 +16,14 @@ export class Exercice {
     /** @type {string} */
     description
 
-    /** @type {int[]} */
+    /** @type {ExercicieSet[]} */
     sets
 
     /**
      * @property {string} id
      * @property {string} name
      * @property {string} description
-     * @property {Exercice[int]} sets
+     * @property {ExercicieSet[]} sets
      */
     constructor(id, name, description, sets) {
       this.id = id

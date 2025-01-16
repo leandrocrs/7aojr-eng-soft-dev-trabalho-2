@@ -1,7 +1,10 @@
 import { z } from 'zod';
+import 'dotenv/config';
 
 import { UserRole } from "./model/UserRole.js";
 import { UsersRepository } from "./UsersRepository.js";
+
+import jwt from 'jsonwebtoken'
 
 export class UserNotFoundError extends Error {
     constructor() {
@@ -44,9 +47,9 @@ export class AuthService {
             throw new InvalidPasswordError();
         }
 
-        delete user.password;
-
-        return user;
+        const token = jwt.sign({name: user.username, role: user.role}, process.env.ACCESS_TOKEN_SECRET)
+        console.log(token)
+        return token
     }
 
     /**
