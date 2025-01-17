@@ -1,4 +1,4 @@
-FROM node:22-alpine
+FROM pulsefit-base:latest
 
 RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 
@@ -12,6 +12,6 @@ RUN npm ci
 
 COPY --chown=node:node . .
 
-EXPOSE 8002
+EXPOSE 8006
 
 CMD [ "node", "src/index.js" ]

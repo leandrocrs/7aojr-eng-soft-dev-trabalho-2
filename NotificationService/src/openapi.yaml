@@ -11,6 +11,8 @@ paths:
     get:
       summary: Retorna as notificações do usuário
       operationId: getNotifications
+      security:
+        - bearerAuth: []
       tags:
         - Notifications
       responses:
@@ -22,3 +24,9 @@ paths:
                 type: array
                 items:
                   type: string
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

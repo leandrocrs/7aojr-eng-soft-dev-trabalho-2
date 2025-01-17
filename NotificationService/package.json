@@ -3,14 +3,18 @@
   "version": "1.0.0",
   "main": "src/index.js",
   "type": "module",
-  "scripts": {},
+  "scripts": {
+    "start": "node src/index.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "Serviço de notificações",
   "dependencies": {
+    "auth-middleware": "file:../libs/auth-middleware",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
     "swagger-ui-express": "^5.0.1",
     "yaml": "^2.7.0"
   }

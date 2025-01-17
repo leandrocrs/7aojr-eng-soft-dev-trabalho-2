@@ -5,6 +5,7 @@ import fs from "fs";
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yaml';
 import path from 'path';
+import { authMiddleware } from 'auth-middleware';
 
 import controller from './controller.js';
 
@@ -22,5 +23,5 @@ app.listen(port, () => {
 });
 
 app.use(express.json());
-app.use('/', controller);
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/', authMiddleware, controller);
