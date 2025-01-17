@@ -11,8 +11,17 @@ Ter o [Docker Compose](https://docs.docker.com/compose/install/) instalado.
 
 ## Rodando o projeto
 
+Necessário primeiro buildar a imagem docker base:
+
+```sh
+chmod u+x ./build-base-image.sh
+./build-base-image.sh
+```
+Esse comando deve ser executado novamente sempre que houver alterações dentro de `./libs`.
+
 Basta utilizar o `docker compose up <serviço>`. Exemplo:
 
 ```sh
 docker compose up user-management-service
 ```
+
