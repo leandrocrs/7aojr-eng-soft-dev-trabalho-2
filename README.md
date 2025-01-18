@@ -25,3 +25,14 @@ Basta utilizar o `docker compose up <serviço>`. Exemplo:
 docker compose up user-management-service
 ```
 
+## Requisitos do trabalho
+
+- [ ] UM MICROSERVIÇO COM AÇÕES CRUD			2 PONTOS (+ 1 PONTO / MICROSERVIÇO) .
+- [ ] TESTES (UNITÁRIOS + INTEGRAÇÃO + UI)	    	+ 1  OU + 2 OU + 3 PONTOS
+- [ ] USO DE BANCO DE DADOS 					+ 2 PONTOS
+- [ ] DEPLOY VIA DOCKER							+ 1 PONTO
+- [ ] COMUNICAÇÃO SINCRONA API	COM SWAGGER	+ 1 PONTOS
+- [ ] COMUNICAÇÃO ASSINCRONA EVENTOS			+ 2 PONTOS
+- [ ] FRONT END 									+ 2 PONTOS
+- [ ] INTEGRAÇÃO TEAMS							+ 1 PONTO
+- [ ] PIPELINE CI/CD					+ 1 PONTO
