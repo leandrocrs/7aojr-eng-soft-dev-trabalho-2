@@ -2,19 +2,17 @@ name: Report And Progress Service CI
 
 on:
   push:
+    branch:
+      - main
     paths:
-      - 'ReportAndProgressService/**'
-  pull_request:
-    paths:
-      - 'ReportAndProgressService/**'
+      - 'report-and-progress-service/**'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        
-      - name: Run build
-        run: |
-          echo "ReportAndProgressService building"
+  deploy-training-service:
+    uses: ./.github/workflows/deploy-docker.yml
+    with:
+      service-dir:  report-and-progress-service
+      docker-hub-repo: leandrocrsfiap/report-and-progress-service
+    secrets:
+      DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
+      DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
