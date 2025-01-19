@@ -45,7 +45,7 @@ jobs:
         echo "current folder $(pwd)"
         ls
 
-        docker build -t $IMAGE_NAME:$IMAGE_TAG .
+        docker build -t $IMAGE_NAME:$IMAGE_TAG  --platform linux/arm/v8 .
         
         # echo $SERVICE_NAME:$IMAGE_TAG
         # docker push $SERVICE_NAME:$IMAGE_TAG
