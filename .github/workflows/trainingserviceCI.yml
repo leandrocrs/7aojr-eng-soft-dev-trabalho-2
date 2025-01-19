@@ -18,3 +18,6 @@ jobs:
     uses: ./.github/workflows/deploy-docker.yml
     with:
       service-name: training-service
+    secrets:
+      DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
+      DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
