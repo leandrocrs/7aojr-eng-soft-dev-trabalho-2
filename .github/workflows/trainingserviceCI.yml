@@ -2,7 +2,7 @@ name: Training Service CI
 
 on:
   push:
-    branch:
+    branches:
       - main
     paths:
       - 'training-service/**'

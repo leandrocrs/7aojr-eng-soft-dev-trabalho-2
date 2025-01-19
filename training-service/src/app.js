@@ -4,8 +4,7 @@ import fs from "fs"
 import express from "express"
 import swaggerUi from 'swagger-ui-express'
 import YAML from 'yaml'
-
-import controller from './Controller.js'
+import controller from './controller.js'
 
 const app = express()
 

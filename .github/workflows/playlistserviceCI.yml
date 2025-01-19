@@ -2,7 +2,7 @@ name: Playlists Catalog Service CI
 
 on:
   push:
-    branch:
+    branches:
       - main
     paths:
       - 'playlist-catalog-service/**'

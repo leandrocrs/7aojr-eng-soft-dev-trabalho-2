@@ -2,7 +2,7 @@ name: Notification Service CI
 
 on:
   push:
-    branch:
+    branches:
       - main
     paths:
       - 'notification-service/**'
