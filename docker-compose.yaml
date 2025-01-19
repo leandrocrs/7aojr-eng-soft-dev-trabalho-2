@@ -40,6 +40,11 @@ services:
   training-service:
     build: ./TrainingService
     container_name: training-service_container
+    depends_on:
+      - rabbitmq
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
     ports:
       - "8006:8006"  
 
@@ -48,3 +53,13 @@ services:
     container_name: user-management-service_container
     ports:
       - "8007:8007"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672" # Porta para conexões do AMQP
+      - "15672:15672" # Porta para o painel de administração do RabbitMQ
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: password

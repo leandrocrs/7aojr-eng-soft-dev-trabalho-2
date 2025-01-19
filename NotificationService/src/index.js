@@ -6,6 +6,7 @@ import swaggerUi from 'swagger-ui-express';
 import YAML from 'yaml';
 import path from 'path';
 import { authMiddleware } from 'auth-middleware';
+import { readMessageToQueue } from './messaging/rabbitmqHelper.cjs'
 
 import controller from './controller.js';
 
@@ -21,6 +22,17 @@ app.listen(port, () => {
     console.log(`NotificationService listening at ${host}:${port}`);
     console.log(`Swagger documentation available at ${host}:${port}/docs`);
 });
+
+
+await readMessageToQueue(
+    'training-created', 
+    {
+    host: "localhost",
+    port: 5672,
+    user: "admin",
+    password: "password"
+  }
+)
 
 app.use(express.json());
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

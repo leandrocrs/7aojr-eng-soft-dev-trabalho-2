@@ -1,5 +1,8 @@
 import express from 'express'
+import 'dotenv/config'
+
 import { TrainingRepository } from './TrainingRepository.js'
+import sendMessageToQueue from './messaging/RabbitmqHelper.cjs'
 
 const router = express.Router()
 const repository = new TrainingRepository()
@@ -39,6 +42,14 @@ router.post('/trainings', async (req, res) => {
   try {
     const newTraining = await repository.create(req.body)
     res.status(201).json(newTraining)
+    
+    sendMessageToQueue('training-created', newTraining, {
+      host: "localhost",
+      port: 5672,
+      user: "admin",
+      password: "password"
+    })
+    
   } catch(error) {
     return res.status(500).send({ message: error.message })
   }
