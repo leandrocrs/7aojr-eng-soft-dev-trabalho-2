@@ -2,10 +2,10 @@ name: Gamification Service CI
 
 on:
   push:
-    branch:
+    branches:
       - main
     paths:
-      - 'gaming-service/**'
+      - 'gamification-service/**'
 
 jobs:
   deploy-training-service:

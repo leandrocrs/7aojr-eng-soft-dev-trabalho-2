@@ -2,7 +2,7 @@ name: Report And Progress Service CI
 
 on:
   push:
-    branch:
+    branches:
       - main
     paths:
       - 'report-and-progress-service/**'

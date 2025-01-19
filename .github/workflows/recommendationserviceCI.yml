@@ -2,7 +2,7 @@ name: Recommendation Service CI
 
 on:
   push:
-    branch:
+    branches:
       - main
     paths:
       - 'recommendation-worker/**'
