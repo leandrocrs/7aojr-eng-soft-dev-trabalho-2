@@ -30,7 +30,8 @@ jobs:
 
     - name: Build and push
       run: |
-        docker build -t $SERVICE_NAME:latest .
+        IMAGE_TAG=$(echo latest)
+        docker build -t $SERVICE_NAME:IMAGE_TAG .
         echo $SERVICE_NAME:IMAGE_TAG
         # docker push $SERVICE_NAME:IMAGE_TAG
       env:
