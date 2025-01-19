@@ -1,8 +1,10 @@
 import { z } from 'zod';
 
 import { Exercise } from "./models/Exercise.js";
-import { PlaylistsRepository } from "./PlaylistsRepository.js";
-import { TrainingSessionsRepository } from './TrainingSessionsRepository.js';
+import { Playlist } from "./models/Playlist.js";
+import { PlaylistsRepository } from "./repositories/PlaylistsRepository.js";
+import { TrainingSessionsRepository } from './repositories/TrainingSessionsRepository.js';
+
 
 export class PlaylistsService {
     /**
@@ -14,15 +16,19 @@ export class PlaylistsService {
         this.trainingSessionRepository = trainingSessionRepository;
     }
 
-    async getPlaylists() {
-        return this.playlistsRepository.getAll();
+    /**
+     * @param {string} username 
+     */
+    async getPlaylists(username) {
+        return this.playlistsRepository.getAll(username);
     }
 
     /**
+     * @param {string} username
      * @param {string} id 
      */
-    async getPlaylistById(id) {
-        return this.playlistsRepository.getById(id);
+    async getPlaylistById(username, id) {
+        return this.playlistsRepository.getById(username, id);
     }
 
     /**
@@ -33,8 +39,8 @@ export class PlaylistsService {
      */
     async addPlaylist(params) {
         const playlist = z.object({
-            title: z.string(),
-            userId: z.string(),
+            title: z.string().min(1),
+            author: z.string(),
             trainingsIds: z.array(z.string())
         }).parse(params);
 
@@ -48,7 +54,7 @@ export class PlaylistsService {
         const playlist = z.object({
             id: z.string(),
             title: z.string(),
-            userId: z.string(),
+            author: z.string(),
             trainingIds: z.array(z.string()),
         }).parse(params);
 
@@ -56,10 +62,11 @@ export class PlaylistsService {
     }
 
     /**
+     * @param {string} username 
      * @param {string} id 
      */
-    async deletePlaylist(id) {
-        return this.playlistsRepository.delete(id);
+    async deletePlaylist(username, id) {
+        return this.playlistsRepository.delete(username, id);
     }
 
     /**

@@ -1,0 +1,191 @@
+openapi: 3.0.0
+info:
+  title: Playlists and Catalog Service
+  version: 1.0.0
+  description: Serviço de Playlists de treinos
+tags:
+  - name: playlists
+    description: Playlists
+  - name: training-session
+    description: Training sessions
+paths:
+  /playlists:
+    get:
+      summary: Retorna as playlists do usuário
+      operationId: getPlaylists
+      security:
+        - bearerAuth: []
+      tags:
+        - playlists
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type:
+                    $ref: "#/components/schemas/Playlist"
+    post:
+      summary: Cria uma nova playlist
+      operationId: createPlaylist
+      security:
+        - bearerAuth: []
+      tags:
+        - playlists
+      requestBody:
+        $ref: "#/components/requestBodies/UpsertPlaylistBody"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Playlist"
+
+  /playlists/{playlistId}:
+    get:
+      summary: Retorna uma playlist específica
+      operationId: getPlaylist
+      security:
+        - bearerAuth: []
+      tags:
+        - playlists
+      parameters:
+        - name: playlistId
+          in: path
+          required: true
+          description: Id da playlist
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Playlist"
+    put:
+      summary: Atualiza uma playlist
+      operationId: updatePlaylist
+      security:
+        - bearerAuth: []
+      tags:
+        - playlists
+      parameters:
+        - name: playlistId
+          in: path
+          required: true
+          description: Id da playlist
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/UpsertPlaylistBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Playlist"
+    delete:
+      summary: Deleta uma playlist
+      operationId: deletePlaylist
+      security:
+        - bearerAuth: []
+      tags:
+        - playlists
+      parameters:
+        - name: playlistId
+          in: path
+          required: true
+          description: Id da playlist
+          schema:
+            type: string
+      responses:
+        "204":
+          description: No Content
+  /playlists/{playlistId}/training-session:
+    post:
+      summary: Cria uma nova sessão de treino
+      operationId: createTrainingSession
+      security:
+        - bearerAuth: []
+      tags:
+        - training-session
+      parameters:
+        - name: playlistId
+          in: path
+          required: true
+          description: Id da playlist
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TrainingSession"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TrainingSession"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  requestBodies:
+    UpsertPlaylistBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+              trainingsIds:
+                type: array
+                items:
+                  type: string
+  schemas:
+    Playlist:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        author:
+          type: string
+        trainingsIds:
+          type: array
+          items:
+            type: string
+    ExerciseSet:
+      type: object
+      properties:
+        reps:
+          type: number
+        weight:
+          type: number
+    Exercise:
+      type: object
+      properties:
+        title:
+          type: string
+        sets:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExerciseSet"
+    TrainingSession:
+      type: object
+      properties:
+        exercises:
+          type: array
+          items:
+            $ref: "#/components/schemas/Exercise"

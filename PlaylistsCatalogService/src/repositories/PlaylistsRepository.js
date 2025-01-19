@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 
-import { Playlist } from "./models/Playlist.js";
+import { Playlist } from "../models/Playlist.js";
 
 export class PlaylistsRepository {
     constructor() {
@@ -8,15 +8,19 @@ export class PlaylistsRepository {
         this.playlistsDataSource = []
     }
 
-    async getAll() {
-        return this.playlistsDataSource;
+    /**
+     * @param {string} username 
+     */
+    async getAll(username) {
+        return this.playlistsDataSource.filter(playlist => playlist.author === username);
     }
 
     /**
+     * @param {string} username
      * @param {string} id 
      */
-    async getById(id) {
-        return this.playlistsDataSource.find(playlist => playlist.id === id);
+    async getById(username, id) {
+        return this.playlistsDataSource.find(playlist => playlist.id === id && playlist.author === username);
     }
 
     /**
@@ -37,7 +41,7 @@ export class PlaylistsRepository {
      * @param {Playlist} playlist 
      */
     async update(playlist) {
-        const index = this.playlistsDataSource.findIndex(p => p.id === playlist.id);
+        const index = this.playlistsDataSource.findIndex(p => p.id === playlist.id && p.author === playlist.author);
 
         if (index === -1) {
             throw new Error('Playlist not found');
@@ -49,32 +53,18 @@ export class PlaylistsRepository {
     }
 
     /**
+     * @param {string} username 
      * @param {string} id 
      */
-    async delete(id) {
-        const index = this.playlistsDataSource.findIndex(p => p.id === id);
+    async delete(username, id) {
+        const playlistToDelete = this.playlistsDataSource.find(p => p.id === id);
 
-        if (index === -1) {
+        if (playlistToDelete == null || playlistToDelete.author !== username) {
             throw new Error('Playlist not found');
         }
 
-        this.playlistsDataSource.splice(index, 1);
-    }
+        this.playlistsDataSource = this.playlistsDataSource.filter(p => p.id !== id);
 
-    /**
-     * @param {string} playlistId 
-     * @param {string} userId
-     * @param {TrainingSession} trainingSession 
-     */
-    async addTrainingSession(playlistId, userId, trainingSession) {
-        const playlist = await this.getById(playlistId);
-
-        if (!playlist) {
-            throw new Error('Playlist not found');
-        }
-
-        playlist.trainingsIds.push(trainingSession.id);
-
-        return playlist;
+        return playlistToDelete;
     }
 }

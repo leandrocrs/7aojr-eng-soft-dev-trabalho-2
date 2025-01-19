@@ -4,7 +4,7 @@ export class ExerciseSet {
      * @param {number} weight 
      */
     constructor(reps, weight) {
-        this.repetitions = reps;
+        this.reps = reps;
         this.weight = weight;
     }
 }

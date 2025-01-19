@@ -22,5 +22,5 @@ app.listen(port, () => {
 });
 
 app.use(express.json());
-app.use('/', controller);
+app.use('/playlists', controller);
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

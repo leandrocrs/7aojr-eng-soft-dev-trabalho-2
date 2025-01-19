@@ -1,4 +1,4 @@
-import { TrainingSession } from './models/TrainingSession.js';
+import { TrainingSession } from '../models/TrainingSession.js';
 
 export class TrainingSessionsRepository {
     constructor() {
@@ -16,5 +16,7 @@ export class TrainingSessionsRepository {
         const newTrainingSession = new TrainingSession(userId, playlistId, trainingSession.exercises, new Date());
 
         this.trainingSessions.push(newTrainingSession);
+
+        return newTrainingSession;
     }
 }
