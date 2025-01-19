@@ -2,19 +2,17 @@ name: User Management Service CI
 
 on:
   push:
+    branch:
+      - main
     paths:
-      - 'UserManagementService/**'
-  pull_request:
-    paths:
-      - 'UserManagementService/**'
+      - 'user-management-service/**'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        
-      - name: Run build
-        run: |
-          echo "UserManagementService building"
+  deploy-training-service:
+    uses: ./.github/workflows/deploy-docker.yml
+    with:
+      service-dir: user-management-service
+      docker-hub-repo: leandrocrsfiap/user-management-service
+    secrets:
+      DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
+      DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}

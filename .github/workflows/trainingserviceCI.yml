@@ -1,23 +1,17 @@
 name: Training Service CI
 
 on:
-  pull_request:
-    types:
-      - opened
-      - synchronize
-      - reopened
-      - closed
   push:
     branch:
       - main
     paths:
-      - 'TrainingService/**'
+      - 'training-service/**'
 
 jobs:
   deploy-training-service:
     uses: ./.github/workflows/deploy-docker.yml
     with:
-      service-name: training-service
+      service-dir: training-service
       docker-hub-repo: leandrocrsfiap/training-service
     secrets:
       DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}

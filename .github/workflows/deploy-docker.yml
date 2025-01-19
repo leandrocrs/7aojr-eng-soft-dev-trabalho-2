@@ -3,8 +3,8 @@ name: Build and Deploy Docker Image
 on:
   workflow_call:
     inputs:
-      service-name:
-        description: 'Nome do Serviço'
+      service-dir:
+        description: 'Nome do diretorio'
         required: true
         type: string
       docker-hub-repo:
@@ -36,15 +36,6 @@ jobs:
       run: |
         IMAGE_NAME=${{ inputs.docker-hub-repo }}
         IMAGE_TAG=latest
-
-        echo "docker hub repo is $IMAGE_NAME : $IMAGE_TAG"
-        echo "current folder $(pwd)"
-
-        cd ${{ inputs.service-name }}
-        
-        echo "current folder $(pwd)"
-        ls
+        cd ${{ inputs.service-dir }}
 
         docker buildx build --platform linux/arm64 -t $IMAGE_NAME:$IMAGE_TAG . --push
-      env:
-        SERVICE_NAME: ${{ github.event.inputs.service-name }}
