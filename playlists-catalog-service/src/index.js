@@ -18,7 +18,7 @@ const swaggerDocument = YAML.parse(file)
 
 app.listen(port, () => {
     console.log(`playlists-catalog-service listening at ${host}:${port} :)`);
-    console.log(`Swagger documentation available at ${host}:${port}/docs`);
+    console.log(`Swagger documentation available at ${host}:${port}/docs :)`);
 });
 
 app.use(express.json());
