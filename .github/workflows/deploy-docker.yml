@@ -39,9 +39,12 @@ jobs:
 
         echo "docker hub repo is $IMAGE_NAME : $IMAGE_TAG"
         echo "current folder $(pwd)"
-        cd ./${{ github.event.inputs.service-name }}
-        pwd
+
+        cd ${{ inputs.service-name }}
+        
+        echo "current folder $(pwd)"
         ls
+        
         # docker build -t $IMAGE_NAME:$IMAGE_TAG .
         
         # echo $SERVICE_NAME:$IMAGE_TAG
