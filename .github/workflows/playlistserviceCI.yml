@@ -5,13 +5,13 @@ on:
     branches:
       - main
     paths:
-      - 'playlist-catalog-service/**'
+      - 'playlists-catalog-service/**'
 
 jobs:
   deploy-training-service:
     uses: ./.github/workflows/deploy-docker.yml
     with:
-      service-dir: playlist-catalog-service
+      service-dir: playlists-catalog-service
       docker-hub-repo: leandrocrsfiap/playlists-catalog-service
     secrets:
       DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
