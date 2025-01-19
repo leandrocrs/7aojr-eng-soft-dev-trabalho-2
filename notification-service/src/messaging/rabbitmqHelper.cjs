@@ -51,10 +51,10 @@ async function sendMessageToQueue(queue, message, options) {
  * @param {string} options.user - RabbitMQ username.
  * @param {string} options.password - RabbitMQ password.
  */
-async function readMessageToQueue(queue, options, callback) {
+async function readMessageToQueue(queue, callback, options) {
     
     const connectionString = `amqp://${options.user}:${options.password}@${options.host}:${options.port}`;
-  
+    console.log("connectionString:", connectionString)
     let connection;
     let channel;
   
@@ -69,7 +69,7 @@ async function readMessageToQueue(queue, options, callback) {
       channel.consume(queue, (msg) => {
         if (msg) {
             const receivedMsg = msg.content.toString()
-            console.log("Received:", receivedMsg)
+            console.log("Received on readMessageToQueue:", receivedMsg)
             callback(receivedMsg); 
             channel.ack(msg)
         }

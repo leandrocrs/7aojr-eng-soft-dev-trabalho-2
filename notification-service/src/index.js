@@ -23,18 +23,22 @@ app.listen(port, () => {
   console.log(`Swagger documentation available at ${host}:${port}/docs`);
 });
 
-await readMessageToQueue(
-  'training-created',
-  {
-    host: process.env.RABBIT_HOST,
-    port: process.env.RABBIT_PORT,
-    user: process.env.RABBIT_USER,
-    password: process.env.RABBIT_PASSWORD
-  },
-  callback = (message) => {
+function handleMessage(message) {
     console.log(`Received message on callback: ${message}`)
-  }
-)
+}
+
+(async () => { 
+    console.log(`listeting to queue training-created`)
+    const queue = 'training-created'
+    const options = {
+        host: process.env.RABBIT_HOST,
+        port: process.env.RABBIT_PORT,
+        user: process.env.RABBIT_USER,
+        password: process.env.RABBIT_PASSWORD
+    }
+  
+    await readMessageToQueue(queue, handleMessage, options)
+})()
 
 app.use(express.json());
 app.use(function logger(req, res, next) {
