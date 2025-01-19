@@ -1,41 +1,69 @@
 version: '3.8'
 
 services:
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway_container
+    networks:
+      - api_gateway_network 
+    ports:
+      - "80:80"
+
   client:
     build: ./client
     container_name: client_container
+    networks:
+      - api_gateway_network 
     ports:
       - "80:80"
 
   gamefication-service:
     build: ./GameficationService
     container_name: gamefication-service_container
+    networks:
+      - api_gateway_network 
     ports:
       - "8001:8001"
+    depends_on:
+      - rabbitmq
 
   notification-service:
     build: ./NotificationService
     container_name: notification-service_container
+    networks:
+      - api_gateway_network 
     ports:
       - "8002:8002"
+    depends_on:
+      - rabbitmq
 
   playlists-catalog-service:
     build: ./PlaylistsCatalogService
     container_name: playlists-catalog-service_container
+    networks:
+      - api_gateway_network 
     ports:
       - "8003:8003"
 
   recommendation-service:
     build: ./RecommendationService
     container_name: recommendation-service_container
+    networks:
+      - api_gateway_network 
     ports:
       - "8004:8004"
+    depends_on:
+      - rabbitmq
 
   report-and-progress-service:
     build: ./ReportAndProgressService
     container_name: report-and-progress-service_container
+    networks:
+      - api_gateway_network 
     ports:
       - "8005:8005"
+    depends_on:
+      - rabbitmq
 
   training-service:
     build: ./TrainingService
@@ -45,21 +73,30 @@ services:
     environment:
       - RABBITMQ_HOST=rabbitmq
       - RABBITMQ_PORT=5672
+    networks:
+      - api_gateway_network 
     ports:
       - "8006:8006"  
 
   user-management-service:
     build: ./UserManagementService
     container_name: user-management-service_container
+    networks:
+      - api_gateway_network 
     ports:
       - "8007:8007"
 
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
+    networks:
+      - api_gateway_network 
     ports:
       - "5672:5672" # Porta para conexões do AMQP
       - "15672:15672" # Porta para o painel de administração do RabbitMQ
     environment:
       RABBITMQ_DEFAULT_USER: admin
       RABBITMQ_DEFAULT_PASS: password
+
+networks:
+  api_gateway_network:
