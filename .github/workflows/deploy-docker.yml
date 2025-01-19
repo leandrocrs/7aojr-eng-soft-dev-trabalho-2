@@ -45,9 +45,6 @@ jobs:
         echo "current folder $(pwd)"
         ls
 
-        docker buildx build --platform linux/arm64 -t $IMAGE_NAME:$IMAGE_TAG   .
-        
-        # echo $SERVICE_NAME:$IMAGE_TAG
-        docker push $SERVICE_NAME:$IMAGE_TAG
+        docker buildx build --platform linux/arm64 -t $IMAGE_NAME:$IMAGE_TAG . --push
       env:
         SERVICE_NAME: ${{ github.event.inputs.service-name }}
