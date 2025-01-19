@@ -47,12 +47,14 @@ export class AuthService {
             throw new InvalidPasswordError();
         }
 
-        const token = jwt.sign({
-            username: user.username,
-            role: user.role,
-            userId: user.id
-        }, 
-        process.env.ACCESS_TOKEN_SECRET)
+        const token = jwt.sign(
+            {
+                username: user.username,
+                role: user.role,
+                userId: user.id
+            },
+            process.env.ACCESS_TOKEN_SECRET)
+
         return token
     }
 

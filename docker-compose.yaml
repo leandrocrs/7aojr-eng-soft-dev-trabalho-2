@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   api-gateway:
     build: ./api-gateway
@@ -124,8 +122,17 @@ services:
     container_name: user-management-service_container
     networks:
       - api_gateway_network 
+      - users-db_network
+    depends_on:
+      - users-db
     ports:
       - "8007:8007"
+    environment:
+      - MONGO_HOST=users-db
+      - MONGO_PORT=27017
+      - MONGO_DB=users-db
+      - MONGO_USER=admin
+      - MONGO_PASSWORD=admin
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -143,6 +150,26 @@ services:
       interval: 5s
       timeout: 30s
       retries: 1
+  
+  users-db:
+    image: mongo:4.4
+    restart: always
+    container_name: users-db
+    env_file:
+      - ./users-db/.env
+    environment:
+      TZ: America/Sao_Paulo
+    ports:
+      - 27017:27017
+    volumes:
+      - users-db_data:/data/db
+    networks:
+      - users-db_network
 
 networks:
   api_gateway_network:
+  users-db_network:
+
+volumes:
+  users-db_data:
+    driver: local

@@ -7,6 +7,8 @@ import YAML from 'yaml';
 
 import controller from './controller.js';
 
+import { initDbConnection } from './db/db.js';
+
 const app = express();
 
 const host = process.env.HOST;
@@ -14,6 +16,13 @@ const port = process.env.PORT;
 
 const file = fs.readFileSync('./openapi.yaml', 'utf8')
 const swaggerDocument = YAML.parse(file)
+
+initDbConnection().then(() => {
+    console.log('Connected to database');
+}).catch((err) => {
+    console.error(err);
+    process.exit(1);
+});
 
 app.listen(port, () => {
     console.log(`user-management-service listening at ${host}:${port}`);

@@ -1,17 +1,30 @@
-import { v4 as uuid } from 'uuid';
-
+import { randomUUID } from 'crypto'
 import { User } from './model/User.js';
 import { UserRole } from './model/UserRole.js';
+import { UserModel } from './db/UserModel.js';
 
 export class UsersRepository {
-    constructor() {
-        /** @type {User[]} */
-        this.users = [];
-    }
 
-    /** @param {string} username */
+    /**
+     * @param {string} username
+     * @returns {Promise<User | null>}
+     */
     async getUserByUsername(username) {
-        return this.users.find(user => user.username === username);
+        let foundUser = null;
+
+        try {
+            foundUser = await UserModel.findOne({ username })
+        } catch {
+            return null;
+        }
+
+        return new User(
+            foundUser.id,
+            foundUser.username,
+            foundUser.bio,
+            foundUser.role,
+            foundUser.password
+        );
     }
 
     /**
@@ -22,11 +35,21 @@ export class UsersRepository {
      * @param {UserRole} params.role
      */
     async createUser(params) {
-        const newUser = new User(uuid(), params.username, params.bio, params.role, params.password);
+        const newUser = new UserModel({
+            username: params.username,
+            password: params.password,
+            bio: params.bio,
+            role: params.role
+        });
 
-        this.users.push(newUser);
+        const savedUser = await newUser.save();
 
-        return newUser;
+        return new User(
+            savedUser.id,
+            savedUser.username,
+            savedUser.bio,
+            savedUser.role,
+        );
     }
 
 }
