@@ -20,7 +20,7 @@ const file = fs.readFileSync(path.join(import.meta.dirname, './openapi.yaml'), '
 const swaggerDocument = YAML.parse(file)
 
 app.listen(port, () => {
-  console.log(`gamefication-service listening at ${host}:${port}`);
+  console.log(`gamefication-service listening at ${host}:${port} :)`);
   console.log(`Swagger documentation available at ${host}:${port}/docs`);
 });
 
