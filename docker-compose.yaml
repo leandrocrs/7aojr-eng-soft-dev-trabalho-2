@@ -50,8 +50,6 @@ services:
     container_name: recommendation-service_container
     networks:
       - api_gateway_network 
-    ports:
-      - "8004:8004"
     depends_on:
       - rabbitmq
 
