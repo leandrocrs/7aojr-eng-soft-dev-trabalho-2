@@ -1,7 +1,7 @@
 name: Build and Deploy Docker Image 
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       service-name:
         description: 'Nome do Serviço'
