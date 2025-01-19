@@ -36,8 +36,12 @@ jobs:
       run: |
         IMAGE_NAME=${{ inputs.docker-hub-repo }}
         IMAGE_TAG=latest
+
         echo "docker hub repo is $IMAGE_NAME : $IMAGE_TAG"
+        
         cd $SERVICE_NAME
+        echo pwd
+        
         docker build -t $IMAGE_NAME:$IMAGE_TAG .
         
         # echo $SERVICE_NAME:$IMAGE_TAG
