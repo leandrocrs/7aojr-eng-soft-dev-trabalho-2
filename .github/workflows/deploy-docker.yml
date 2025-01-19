@@ -48,6 +48,6 @@ jobs:
         docker buildx build --platform linux/arm64 -t $IMAGE_NAME:$IMAGE_TAG   .
         
         # echo $SERVICE_NAME:$IMAGE_TAG
-        # docker push $SERVICE_NAME:$IMAGE_TAG
+        docker push $SERVICE_NAME:$IMAGE_TAG
       env:
         SERVICE_NAME: ${{ github.event.inputs.service-name }}
