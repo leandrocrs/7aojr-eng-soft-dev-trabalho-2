@@ -34,6 +34,11 @@ services:
       - "8001:8001"
     depends_on:
       - rabbitmq
+    environment:
+      - RABBIT_HOST=rabbitmq
+      - RABBIT_PORT=5672
+      - RABBIT_USER=admin
+      - RABBIT_PASSWORD=password
 
   notification-service:
     build: ./notification-service
@@ -44,6 +49,11 @@ services:
       - "8002:8002"
     depends_on:
       - rabbitmq
+    environment:
+      - RABBIT_HOST=rabbitmq
+      - RABBIT_PORT=5672
+      - RABBIT_USER=admin
+      - RABBIT_PASSWORD=password
 
   playlists-catalog-service:
     build: ./playlists-catalog-service
@@ -52,6 +62,11 @@ services:
       - api_gateway_network 
     ports:
       - "8003:8003"
+    environment:
+      - RABBIT_HOST=rabbitmq
+      - RABBIT_PORT=5672
+      - RABBIT_USER=admin
+      - RABBIT_PASSWORD=password
 
   recommendation-worker:
     build: ./recommendation-worker
@@ -75,6 +90,11 @@ services:
       - "8005:8005"
     depends_on:
       - rabbitmq
+    environment:
+      - RABBIT_HOST=rabbitmq
+      - RABBIT_PORT=5672
+      - RABBIT_USER=admin
+      - RABBIT_PASSWORD=password
 
   training-service:
     build: ./training-service
@@ -82,8 +102,10 @@ services:
     depends_on:
       - rabbitmq
     environment:
-      - RABBITMQ_HOST=rabbitmq
-      - RABBITMQ_PORT=5672
+      - RABBIT_HOST=rabbitmq
+      - RABBIT_PORT=5672
+      - RABBIT_USER=admin
+      - RABBIT_PASSWORD=password
     networks:
       - api_gateway_network 
     ports:

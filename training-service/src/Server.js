@@ -16,7 +16,7 @@ const host = process.env.HOST
 const port = process.env.PORT
 
 app.listen(port, () => {
-  console.log(`TainingService running at ${host}:${port}`)
+  console.log(`training-service running at ${host}:${port}`)
   console.log(`Swagger documentation available at ${host}:${port}/docs`)
 })
 
