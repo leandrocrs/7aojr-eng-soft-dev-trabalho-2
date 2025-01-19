@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "checkJs": true
+    },
+    "files": [
+        "typings/index.d.ts"
+    ],
+    "include": [
+        "typings",
+        "src"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

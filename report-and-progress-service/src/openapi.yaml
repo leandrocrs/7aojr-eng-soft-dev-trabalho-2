@@ -1,0 +1,32 @@
+openapi: 3.0.0
+info:
+  title: Notifications Service
+  version: 1.0.0
+  description: Serviço de Notificações
+tags:
+  - name: Notifications
+    description: Notificações
+paths:
+  /notifications:
+    get:
+      summary: Retorna as notificações do usuário
+      operationId: getNotifications
+      security:
+        - bearerAuth: []
+      tags:
+        - Notifications
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

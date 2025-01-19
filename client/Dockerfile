@@ -1,4 +1,4 @@
-FROM node:22-alpine AS build
+FROM pulsefit-base:latest AS build
 
 RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 

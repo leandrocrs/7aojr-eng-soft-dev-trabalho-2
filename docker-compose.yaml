@@ -8,6 +8,14 @@ services:
       - api_gateway_network 
     ports:
       - "80:80"
+    depends_on:
+      - client
+      - gamefication-service
+      - notification-service
+      - playlists-catalog-service
+      - report-and-progress-service
+      - training-service
+      - user-management-service
 
   client:
     build: ./client
@@ -15,10 +23,10 @@ services:
     networks:
       - api_gateway_network 
     ports:
-      - "80:80"
+      - "8080:80"
 
   gamefication-service:
-    build: ./GameficationService
+    build: ./gamefication-service
     container_name: gamefication-service_container
     networks:
       - api_gateway_network 
@@ -28,7 +36,7 @@ services:
       - rabbitmq
 
   notification-service:
-    build: ./NotificationService
+    build: ./notification-service
     container_name: notification-service_container
     networks:
       - api_gateway_network 
@@ -38,16 +46,16 @@ services:
       - rabbitmq
 
   playlists-catalog-service:
-    build: ./PlaylistsCatalogService
+    build: ./playlists-catalog-service
     container_name: playlists-catalog-service_container
     networks:
       - api_gateway_network 
     ports:
       - "8003:8003"
 
-  recommendation-service:
-    build: ./RecommendationService
-    container_name: recommendation-service_container
+  recommendation-worker:
+    build: ./recommendation-worker
+    container_name: recommendation-worker_container
     networks:
       - api_gateway_network 
     depends_on:
@@ -59,7 +67,7 @@ services:
       - RABBIT_PASSWORD=password
 
   report-and-progress-service:
-    build: ./ReportAndProgressService
+    build: ./report-and-progress-service
     container_name: report-and-progress-service_container
     networks:
       - api_gateway_network 
@@ -69,7 +77,7 @@ services:
       - rabbitmq
 
   training-service:
-    build: ./TrainingService
+    build: ./training-service
     container_name: training-service_container
     depends_on:
       - rabbitmq
@@ -82,7 +90,7 @@ services:
       - "8006:8006"  
 
   user-management-service:
-    build: ./UserManagementService
+    build: ./user-management-service
     container_name: user-management-service_container
     networks:
       - api_gateway_network 
