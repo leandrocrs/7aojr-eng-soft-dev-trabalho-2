@@ -40,6 +40,7 @@ jobs:
         echo "docker hub repo is $IMAGE_NAME : $IMAGE_TAG"
         
         cd ./${{ github.event.inputs.service-name }}
+        pwd
         
         docker build -t $IMAGE_NAME:$IMAGE_TAG .
         
