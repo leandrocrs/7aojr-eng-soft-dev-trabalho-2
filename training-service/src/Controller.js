@@ -2,7 +2,7 @@ import express from 'express'
 import 'dotenv/config'
 
 import { authMiddleware } from 'auth-middleware';
-import { TrainingRepository } from './TrainingRepository.js'
+import { TrainingRepository } from './trainingRepository.js'
 import { sendMessageToQueue } from './messaging/rabbitmqHelper.js'
 
 const router = express.Router()
@@ -16,7 +16,6 @@ router.get('/trainings', async (req, res) => {
     return res.status(500).send({ message: error.message })
   }
 })
-
 
 /** @param {string} id */
 router.get('/trainings/:id', async (req, res) => {
@@ -44,7 +43,7 @@ router.post('/trainings', authMiddleware, async (req, res) => {
     const newTraining = await repository.create(req.body)
     res.status(201).json(newTraining)
 
-    sendMessageToQueue('training-created', newTraining, {
+    sendMessageToQueue('training-created', newTraining.name, {
       host: process.env.RABBIT_HOST,
       port: process.env.RABBIT_PORT,
       user: process.env.RABBIT_USER,

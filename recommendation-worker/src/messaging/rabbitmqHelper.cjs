@@ -1,4 +1,4 @@
-import amqp from 'amqplib';
+const amqp = require('amqplib');
 
 /**
  * Sends a message to a RabbitMQ queue.
@@ -11,8 +11,8 @@ import amqp from 'amqplib';
  * @param {string} options.user - RabbitMQ username.
  * @param {string} options.password - RabbitMQ password.
  */
-export async function sendMessageToQueue(queue, message, options) {
-
+async function sendMessageToQueue(queue, message, options) {
+    
   const connectionString = `amqp://${options.user}:${options.password}@${options.host}:${options.port}`;
 
   let connection;
@@ -51,28 +51,32 @@ export async function sendMessageToQueue(queue, message, options) {
  * @param {string} options.user - RabbitMQ username.
  * @param {string} options.password - RabbitMQ password.
  */
-export async function readMessageToQueue(queue, options) {
-
-  const connectionString = `amqp://${options.user}:${options.password}@${options.host}:${options.port}`;
-
-  let connection;
-  let channel;
-
-  try {
-    // Establish connection to RabbitMQ
-    connection = await amqp.connect(connectionString);
-    channel = await connection.createChannel();
-
-    // Ensure the queue exists
-    await channel.assertQueue(queue, { durable: false });
-
-    channel.consume(queue, (msg) => {
-      if (msg) {
-        console.log("Received:", msg.content.toString());
-        channel.ack(msg)
-      }
-    }, { noAck: false })
-  } catch (error) {
-    console.error('Error sending message to RabbitMQ:', error);
-  }
+async function readMessageToQueue(queue, callback, options) {
+    
+    const connectionString = `amqp://${options.user}:${options.password}@${options.host}:${options.port}`;
+    console.log("connectionString:", connectionString)
+    let connection;
+    let channel;
+  
+    try {
+      // Establish connection to RabbitMQ
+      connection = await amqp.connect(connectionString);
+      channel = await connection.createChannel();
+  
+      // Ensure the queue exists
+      await channel.assertQueue(queue, { durable: false });
+  
+      channel.consume(queue, (msg) => {
+        if (msg) {
+            const receivedMsg = msg.content.toString()
+            console.log("Received on readMessageToQueue:", receivedMsg)
+            callback(receivedMsg); 
+            channel.ack(msg)
+        }
+      }, { noAck: false })
+    } catch (error) {
+      console.error('Error sending message to RabbitMQ:', error);
+    }
 }
+  
+module.exports = { sendMessageToQueue, readMessageToQueue }
