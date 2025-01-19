@@ -9,7 +9,7 @@ services:
     ports:
       - "80:80"
     depends_on:
-      - client
+      - frontend
       - gamefication-service
       - notification-service
       - playlists-catalog-service
@@ -17,9 +17,9 @@ services:
       - training-service
       - user-management-service
 
-  client:
-    build: ./client
-    container_name: client_container
+  frontend:
+    build: ./frontend
+    container_name: frontend_container
     networks:
       - api_gateway_network 
     ports:

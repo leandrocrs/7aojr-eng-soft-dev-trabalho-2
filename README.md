@@ -43,6 +43,18 @@ Se tiver enfrentando erros, tentar reconstruir a infra com o comando:
 docker compose up --build
 ```
 
+## Frontend
+- [frontend](http://localhost/)
+
+## APIs
+
+- [/users/](http://localhost/api/users/docs)
+- [/playlists-catalog/](http://localhost/api/playlists-catalog/docs)
+- [/training/](http://localhost/api/training/docs)
+- [/reports-and-progress/](http://localhost/api/reports-and-progress/docs)
+- [/notifications/](http://localhost/api/notifications/docs)
+- [/gamefication/](http://localhost/api/gamefication/docs)
+
 ## Requisitos do trabalho
 
 - [ ] UM MICROSERVIÇO COM AÇÕES CRUD			2 PONTOS (+ 1 PONTO / MICROSERVIÇO) .
