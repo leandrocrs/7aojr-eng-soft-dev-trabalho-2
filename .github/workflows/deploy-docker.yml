@@ -7,6 +7,10 @@ on:
         description: 'Nome do Serviço'
         required: true
         type: string
+      docker-hub-repo:
+        description: 'Repositório no Docker Hub'
+        required: true
+        type: string
     secrets: 
       DOCKER_HUB_USER:
         required: true
@@ -30,10 +34,11 @@ jobs:
 
     - name: Build and push
       run: |
-        IMAGE_TAG=latest
-        docker build -t $SERVICE_NAME:$IMAGE_TAG .
+        docker build -t $DOCKE_HUB_REPO:$IMAGE_TAG .
         # cd $SERVICE_NAME
         # echo $SERVICE_NAME:$IMAGE_TAG
         # docker push $SERVICE_NAME:$IMAGE_TAG
       env:
         SERVICE_NAME: ${{ github.event.inputs.service-name }}
+        DOCKER_HUB_REPO: ${{ github.event.inputs.docker-hub-repo }}
+        IMAGE_TAG: latest
