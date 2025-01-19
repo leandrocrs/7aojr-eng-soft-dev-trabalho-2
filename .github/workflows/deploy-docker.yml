@@ -31,8 +31,8 @@ jobs:
     - name: Build and push
       run: |
         IMAGE_TAG=${{ github.sha }}
-        docker build -t $SERVICE_NAME:IMAGE_TAG .
-        echo $SERVICE_NAME:IMAGE_TAG
-        # docker push $SERVICE_NAME:IMAGE_TAG
+        docker build -t $SERVICE_NAME:$IMAGE_TAG .
+        echo $SERVICE_NAME:$IMAGE_TAG
+        # docker push $SERVICE_NAME:$IMAGE_TAG
       env:
         SERVICE_NAME: ${{ github.event.inputs.service-name }}
