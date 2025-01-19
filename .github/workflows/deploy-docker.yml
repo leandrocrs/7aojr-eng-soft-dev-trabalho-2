@@ -32,8 +32,8 @@ jobs:
       run: |
         IMAGE_TAG=latest
         docker build -t $SERVICE_NAME:$IMAGE_TAG .
-        cd ${{ inputs.service-name }}
-        echo $SERVICE_NAME:$IMAGE_TAG
+        # cd $SERVICE_NAME
+        # echo $SERVICE_NAME:$IMAGE_TAG
         # docker push $SERVICE_NAME:$IMAGE_TAG
       env:
         SERVICE_NAME: ${{ github.event.inputs.service-name }}
