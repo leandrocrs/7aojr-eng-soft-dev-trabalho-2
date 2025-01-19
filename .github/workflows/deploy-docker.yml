@@ -40,7 +40,7 @@ jobs:
         echo "docker hub repo is $IMAGE_NAME : $IMAGE_TAG"
         
         cd $SERVICE_NAME
-        echo pwd
+        pwd
         
         docker build -t $IMAGE_NAME:$IMAGE_TAG .
         
