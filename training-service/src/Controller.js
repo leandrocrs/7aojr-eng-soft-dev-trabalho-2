@@ -2,7 +2,7 @@ import express from 'express'
 import 'dotenv/config'
 
 import { authMiddleware } from 'auth-middleware';
-import { TrainingRepository } from './trainingRepository.js'
+import { TrainingRepository } from './TrainingRepository.js'
 import { sendMessageToQueue } from './messaging/rabbitmqHelper.js'
 
 const router = express.Router()
