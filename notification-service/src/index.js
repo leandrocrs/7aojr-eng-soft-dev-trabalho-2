@@ -30,6 +30,9 @@ await readMessageToQueue(
     port: process.env.RABBIT_PORT,
     user: process.env.RABBIT_USER,
     password: process.env.RABBIT_PASSWORD
+  },
+  callback = (message) => {
+    console.log(`Received message on callback: ${message}`)
   }
 )
 

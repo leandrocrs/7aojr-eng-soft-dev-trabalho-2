@@ -1,7 +1,8 @@
 import express from 'express'
 import 'dotenv/config'
 
-import { TrainingRepository } from './TrainingRepository.js'
+import { authMiddleware } from 'auth-middleware';
+import { TrainingRepository } from './trainingRepository.js'
 import { sendMessageToQueue } from './messaging/rabbitmqHelper.js'
 
 const router = express.Router()
@@ -29,7 +30,7 @@ router.get('/trainings/:id', async (req, res) => {
 })
 
 /** @param {string} id */
-router.put('/trainings/:id', async (req, res) => {
+router.put('/trainings/:id', authMiddleware, async (req, res) => {
   try {
     const updatedTraining = await repository.updateById(req.params.id, req.body)
     res.status(200).json(updatedTraining)
@@ -38,7 +39,7 @@ router.put('/trainings/:id', async (req, res) => {
   }
 })
 
-router.post('/trainings', async (req, res) => {
+router.post('/trainings', authMiddleware, async (req, res) => {
   try {
     const newTraining = await repository.create(req.body)
     res.status(201).json(newTraining)
@@ -56,7 +57,7 @@ router.post('/trainings', async (req, res) => {
 })
 
 /** @param {string} id */
-router.delete('/trainings/:id', async (req, res) => {
+router.delete('/trainings/:id', authMiddleware, async (req, res) => {
   try {
     const deletedTraining = await repository.deleteById(req.params.id)
     res.status(200).json(deletedTraining)

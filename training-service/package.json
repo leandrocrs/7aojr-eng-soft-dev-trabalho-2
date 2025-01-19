@@ -12,6 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "auth-middleware": "file:../libs/auth-middleware",
     "amqplib": "^0.10.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
