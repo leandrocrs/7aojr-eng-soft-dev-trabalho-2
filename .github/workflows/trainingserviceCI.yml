@@ -1,20 +1,23 @@
 name: Training Service CI
 
 on:
-  push:
-    paths:
-      - 'TrainingService/**'
   pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - closed
+  push:
+    branch:
+      - main
     paths:
       - 'TrainingService/**'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        
-      - name: Run build
-        run: |
-          echo "TrainingService building"
+  deploy-training-service:
+    uses: .github/workflows/deploy-docker.yml
+    with:
+      service-name: training-service
+    secrets:
+      DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+      DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
