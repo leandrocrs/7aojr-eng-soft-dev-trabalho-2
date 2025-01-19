@@ -52,6 +52,11 @@ services:
       - api_gateway_network 
     depends_on:
       - rabbitmq
+    environment:
+      - RABBIT_HOST=rabbitmq
+      - RABBIT_PORT=5672
+      - RABBIT_USER=admin
+      - RABBIT_PASSWORD=password
 
   report-and-progress-service:
     build: ./ReportAndProgressService
