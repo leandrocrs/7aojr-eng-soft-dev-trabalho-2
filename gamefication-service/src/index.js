@@ -21,7 +21,7 @@ const swaggerDocument = YAML.parse(file)
 
 app.listen(port, () => {
   console.log(`gamefication-service listening at ${host}:${port} :)`);
-  console.log(`Swagger documentation available at ${host}:${port}/docs`);
+  console.log(`Swagger documentation available at ${host}:${port}/docs :)`);
 });
 
 
