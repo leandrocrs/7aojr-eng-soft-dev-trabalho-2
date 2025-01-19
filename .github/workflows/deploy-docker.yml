@@ -44,8 +44,8 @@ jobs:
         
         echo "current folder $(pwd)"
         ls
-        
-        # docker build -t $IMAGE_NAME:$IMAGE_TAG .
+
+        docker build -t $IMAGE_NAME:$IMAGE_TAG .
         
         # echo $SERVICE_NAME:$IMAGE_TAG
         # docker push $SERVICE_NAME:$IMAGE_TAG
