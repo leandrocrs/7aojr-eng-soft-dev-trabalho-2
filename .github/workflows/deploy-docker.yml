@@ -34,13 +34,14 @@ jobs:
 
     - name: Build and push
       run: |
-        echo "docker hub repo is ${{ inputs.docker-hub-repo }}:$IMAGE_TAG"
+        IMAGE_NAME=${{ inputs.docker-hub-repo }}
+        IMAGE_TAG=latest
 
-        docker build -t $DOCKE_HUB_REPO:$IMAGE_TAG .
+        echo "docker hub repo is $IMAGE_NAME : $IMAGE_TAG"
+
+        docker build -t $IMAGE_NAME:$IMAGE_TAG .
         # cd $SERVICE_NAME
         # echo $SERVICE_NAME:$IMAGE_TAG
         # docker push $SERVICE_NAME:$IMAGE_TAG
       env:
         SERVICE_NAME: ${{ github.event.inputs.service-name }}
-        DOCKER_HUB_REPO: ${{ github.event.inputs.docker-hub-repo }}
-        IMAGE_TAG: latest
