@@ -4,7 +4,7 @@ import { sendMessageToQueue, readMessageToQueue } from './messaging/rabbitmqHelp
 
 console.log('recommendation-worker is running....')
 
-async function handleMessage(message) {
+export async function handleMessage(message) {
   const queue = 'recommendation-created'
   const options = {
       host: process.env.RABBIT_HOST,
