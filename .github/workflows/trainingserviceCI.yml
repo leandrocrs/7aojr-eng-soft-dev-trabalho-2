@@ -15,7 +15,7 @@ on:
 
 jobs:
   deploy-training-service:
-    uses: .github/workflows/deploy-docker.yml@ci-cd
+    uses: ./.github/workflows/deploy-docker.yml
     with:
       service-name: training-service
     secrets:
