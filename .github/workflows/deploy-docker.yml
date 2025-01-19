@@ -34,7 +34,7 @@ jobs:
 
     - name: Build and push
       run: |
-        echo "docker hub repo is $DOCKER_HUB_REPO:$IMAGE_TAG"
+        echo "docker hub repo is ${{ inputs.docker-hub-repo }}:$IMAGE_TAG"
 
         docker build -t $DOCKE_HUB_REPO:$IMAGE_TAG .
         # cd $SERVICE_NAME
