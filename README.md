@@ -7,22 +7,40 @@ Trabalho 2 de Engineering Software Development do curso MBA 7AOJR da Fiap
 
 ## Requisitos
 
-Ter o [Docker Compose](https://docs.docker.com/compose/install/) instalado.
+- [Docker Compose](https://docs.docker.com/compose/install/)
+- Shell [POSIX](https://pt.wikipedia.org/wiki/POSIX). Ex: (sh, bash, zsh)
 
 ## Rodando o projeto
+
+### 1. Construir a imagem base
 
 Necessário primeiro buildar a imagem docker base:
 
 ```sh
+# dar permissão. necessário executar só uma vez
 chmod u+x ./build-base-image.sh
+# constrói a imagem base
 ./build-base-image.sh
 ```
 Esse comando deve ser executado novamente sempre que houver alterações dentro de `./libs`.
 
-Basta utilizar o `docker compose up <serviço>`. Exemplo:
+### 2. Levantar a infra
 
 ```sh
+docker compose up
+```
+
+Opcionalmente, caso queira rodar somente algum serviço específico, basta utilizar o `docker compose up <serviço>`.
+
+Exemplo:
+```sh
 docker compose up user-management-service
+```
+
+Se tiver enfrentando erros, tentar reconstruir a infra com o comando:
+
+```sh
+docker compose up --build
 ```
 
 ## Requisitos do trabalho
