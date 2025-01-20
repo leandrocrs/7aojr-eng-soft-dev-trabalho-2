@@ -7,7 +7,7 @@ services:
     ports:
       - "80:80"
     depends_on:
-      - frontend
+      # - frontend
       - gamefication-service
       - notification-service
       - playlists-catalog-service

@@ -1,13 +1,15 @@
 import { createBrowserRouter, Outlet } from "react-router";
 
+import { AuthenticatedArea } from "./components/authenticated-area";
+
 export const router = createBrowserRouter([
+    { path: "/entrar", lazy: () => import('./pages/entrar') },
+    { path: "/cadastrar", lazy: () => import('./pages/cadastrar') },
     {
         path: "/",
-        element: <Outlet />,
+        element: <AuthenticatedArea />,
         children: [
             { index: true, lazy: () => import('./pages/home') },
-            { path: "entrar", lazy: () => import('./pages/entrar') },
-            { path: "cadastrar", lazy: () => import('./pages/cadastrar') },
             {
                 path: "meus-clientes",
                 element: <Outlet />,

@@ -5,7 +5,6 @@ import fs from "fs";
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yaml';
 import path from 'path';
-import { authMiddleware } from 'auth-middleware';
 import { readMessageToQueue } from './messaging/rabbitmqHelper.cjs'
 
 import controller from './controller.js';
@@ -49,4 +48,4 @@ app.use(function logger(req, res, next) {
   next();
 });
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.use('/', authMiddleware, controller);
+app.use('/', controller);
