@@ -2,7 +2,7 @@ import 'dotenv/config.js';
 
 import { readMessageToQueue } from './messaging/rabbitmqHelper.js'
 
-console.log('recommendation-worker is running...')
+console.log('recommendation-worker is running... ;)')
 
 await readMessageToQueue(
   'training-created',
