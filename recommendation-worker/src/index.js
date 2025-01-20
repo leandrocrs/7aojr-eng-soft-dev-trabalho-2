@@ -2,7 +2,7 @@ import 'dotenv/config.js';
 
 import { sendMessageToQueue, readMessageToQueue } from './messaging/rabbitmqHelper.cjs'
 
-console.log('recommendation-worker is running....')
+console.log('recommendation-worker is running.... :)')
 
 export async function handleMessage(message) {
   const queue = 'recommendation-created'
