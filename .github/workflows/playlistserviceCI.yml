@@ -2,19 +2,17 @@ name: Playlists Catalog Service CI
 
 on:
   push:
+    branches:
+      - main
     paths:
-      - 'PlaylistsCatalogService/**'
-  pull_request:
-    paths:
-      - 'PlaylistsCatalogService/**'
+      - 'playlists-catalog-service/**'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        
-      - name: Run build
-        run: |
-          echo "PlaylistsCatalogService building"
+  deploy-training-service:
+    uses: ./.github/workflows/deploy-docker.yml
+    with:
+      service-dir: playlists-catalog-service
+      docker-hub-repo: leandrocrsfiap/playlists-catalog-service
+    secrets:
+      DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
+      DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}

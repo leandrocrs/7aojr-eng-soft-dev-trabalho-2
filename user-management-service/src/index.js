@@ -4,7 +4,6 @@ import express from 'express';
 import fs from "fs";
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yaml';
-
 import controller from './controller.js';
 
 import { initDbConnection } from './db/db.js';

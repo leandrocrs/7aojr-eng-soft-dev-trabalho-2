@@ -2,19 +2,17 @@ name: Recommendation Service CI
 
 on:
   push:
+    branches:
+      - main
     paths:
-      - 'RecommendationService/**'
-  pull_request:
-    paths:
-      - 'RecommendationService/**'
+      - 'recommendation-worker/**'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        
-      - name: Run build
-        run: |
-          echo "RecommendationService building"
+  deploy-training-service:
+    uses: ./.github/workflows/deploy-docker.yml
+    with:
+      service-dir: recommendation-worker
+      docker-hub-repo: leandrocrsfiap/recommendation-worker
+    secrets:
+      DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
+      DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}

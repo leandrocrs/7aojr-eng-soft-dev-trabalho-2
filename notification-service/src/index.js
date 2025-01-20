@@ -8,6 +8,7 @@ import path from 'path';
 import { readMessageToQueue } from './messaging/rabbitmqHelper.cjs'
 
 import controller from './controller.js';
+import { notifications } from './controller.js';
 
 const app = express();
 
@@ -18,24 +19,23 @@ const file = fs.readFileSync(path.join(import.meta.dirname, './openapi.yaml'), '
 const swaggerDocument = YAML.parse(file)
 
 app.listen(port, () => {
-  console.log(`notification-service listening at ${host}:${port}`);
+  console.log(`notification-service listening at ${host}:${port} :)`);
   console.log(`Swagger documentation available at ${host}:${port}/docs`);
 });
 
 function handleMessage(message) {
-    console.log(`Received message on callback: ${message}`)
+    notifications.push(message)
 }
 
 (async () => { 
-    console.log(`listeting to queue training-created`)
-    const queue = 'training-created'
+    console.log(`listeting to queue recommendation-created`)
+    const queue = 'recommendation-created'
     const options = {
         host: process.env.RABBIT_HOST,
         port: process.env.RABBIT_PORT,
         user: process.env.RABBIT_USER,
         password: process.env.RABBIT_PASSWORD
     }
-  
     await readMessageToQueue(queue, handleMessage, options)
 })()
 

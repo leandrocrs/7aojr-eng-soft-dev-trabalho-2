@@ -1,4 +1,4 @@
-FROM pulsefit-base:latest
+FROM leandrocrsfiap/pulsefit-base:latest
 
 RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 
